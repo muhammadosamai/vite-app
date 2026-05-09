@@ -14,8 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build test image
-        run: docker build --target test -t vite-app-test . || docker build -t vite-app-test .
+      - name: Build Docker image
+        run: docker build -t vite-app-test .
 
       - name: Run tests inside container
         run: docker run --rm vite-app-test
