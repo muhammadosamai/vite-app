@@ -9,8 +9,17 @@ jobs:
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
+    environment: SERVER_HOST
 
     steps:
+      - name: Debug secrets
+        run: |
+          echo "Host: ${{ secrets.EC2_HOST }}"
+          echo "User: ${{ secrets.EC2_USER }}"
+          echo "Key length: ${#EC2_SSH_KEY}"
+        env:
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
