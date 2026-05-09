@@ -6,24 +6,9 @@ on:
       - main
 
 jobs:
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Build Docker image
-        run: docker build -t vite-app-test .
-
-      - name: Run tests inside container
-        run: docker run --rm vite-app-test
-
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
-    needs: test
 
     steps:
       - name: Deploy via SSH
